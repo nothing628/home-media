@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "target": "ES5",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/js/*"],
+        }
+    },
+    "exclude": ["node_modules", "public"],
+    "include": [
+        "resources/**/*.ts",
+        "resources/**/*.d.ts",
+        "resources/**/*.tsx",
+        "resources/**/*.vue"
+    ]
+}
