@@ -16,7 +16,7 @@
 <body>
     <div class="" id="app">
         <x-header></x-header>
-        <div>
+        <div class="block relative min-h-screen pt-16">
             <x-sidebar></x-sidebar>
             <x-content></x-content>
         </div>
