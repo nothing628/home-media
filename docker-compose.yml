@@ -26,7 +26,7 @@ services:
             - pgsql
             - meilisearch
             - redis
-            - selenium
+            # - selenium
     pgsql:
         image: 'postgres:14'
         ports:
@@ -69,12 +69,12 @@ services:
             test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
-    selenium:
-        image: 'selenium/standalone-chrome'
-        volumes:
-            - '/dev/shm:/dev/shm'
-        networks:
-            - sail
+    # selenium:
+    #     image: 'selenium/standalone-chrome'
+    #     volumes:
+    #         - '/dev/shm:/dev/shm'
+    #     networks:
+    #         - sail
     memcached:
         image: 'memcached:alpine'
         ports:
