@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,8 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [HomeController::class, 'showHomePageView'])->name('home');
-Route::get('/upload', [HomeController::class, 'showUploadPageView'])->name('upload');
+Route::get('/upload', [VideoController::class, 'showUploadPageView'])->name('upload');
+Route::post('/upload', [VideoController::class, 'storeVideoUpload']);
 Route::get('/dashboard', [DashboardController::class, 'showDashboardView'])
     ->middleware(['auth'])
     ->name('dashboard');
