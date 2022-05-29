@@ -18,6 +18,7 @@ class VideoFactory extends Factory
     {
         return [
             'title' => $this->faker->words(3, true),
+            'filepath' => $this->faker->filePath(),
         ];
     }
 }

@@ -12,19 +12,29 @@ class VideoController extends Controller
         return view('upload');
     }
 
+    protected function storeVideoFile($file)
+    {
+        if (is_null($file)) {
+            return null;
+        }
+
+        $extension = $file->extension();
+        $name = $file->getFilename();
+        $path = storage_path('uploads');
+        $file->move($path, $name . '.' . $extension);
+
+        return $path . "/" . $name . "." . $extension;
+    }
+
     public function storeVideoUpload(Request $request)
     {
         $allData = $request->only(['title']);
         $videoFile = $request->file('file');
-
-        if ($videoFile) {
-            $extension = $videoFile->extension();
-            $name = $videoFile->getFilename();
-            $videoFile->move(storage_path('uploads'), $name . '.' . $extension);
-        }
+        $videoFilePath = $this->storeVideoFile($videoFile);
 
         $video = new Video();
         $video->title = $allData['title'];
+        $video->filepath = $videoFilePath;
         $video->save();
 
         return redirect()->to('upload')->with('video', $video);
