@@ -12,6 +12,11 @@ class VideoController extends Controller
         return view('upload');
     }
 
+    public function showVideoPage()
+    {
+        //
+    }
+
     protected function storeVideoFile($file)
     {
         if (is_null($file)) {
@@ -20,7 +25,7 @@ class VideoController extends Controller
 
         $extension = $file->extension();
         $name = $file->getFilename();
-        $path = storage_path('uploads');
+        $path = storage_path('app/public');
         $file->move($path, $name . '.' . $extension);
 
         return $path . "/" . $name . "." . $extension;
