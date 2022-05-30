@@ -12,9 +12,11 @@ class VideoController extends Controller
         return view('upload');
     }
 
-    public function showVideoPage()
+    public function showVideoPage(Video $video)
     {
-        //
+        $public_path = basename($video->filepath);
+        $public_url = asset('storage/' . $public_path);
+        return view('play', ['video' => $video, 'url' => $public_url]);
     }
 
     protected function storeVideoFile($file)
