@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div>
+    <div class="max-w-6xl mx-auto">
         <video width="640" controls class="w-full mb-4">
             <source src="{{$url}}" type="video/mp4"></source>
         </video>
