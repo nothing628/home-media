@@ -44,6 +44,6 @@ class VideoController extends Controller
         $video->filepath = $videoFilePath;
         $video->save();
 
-        return redirect()->to('upload')->with('video', $video);
+        return view('upload-success');
     }
 }
