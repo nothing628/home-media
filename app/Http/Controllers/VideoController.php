@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Events\VideoUploaded;
 
 class VideoController extends Controller
 {
@@ -43,6 +44,8 @@ class VideoController extends Controller
         $video->title = $allData['title'];
         $video->filepath = $videoFilePath;
         $video->save();
+
+        VideoUploaded::dispatch($video);
 
         return view('upload-success');
     }

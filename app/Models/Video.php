@@ -16,4 +16,12 @@ class Video extends Model
     public $incrementing = false;
     protected $primaryKey = 'id';
     protected $keyType = 'string';
+
+    public function getPublicPathAttribute()
+    {
+        $filepath = $this->filepath;
+        $filename =  basename($filepath);
+
+        return "public/".$filename;
+    }
 }
