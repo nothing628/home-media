@@ -7,8 +7,15 @@ use Illuminate\Queue\InteractsWithQueue;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use App\Events\VideoUploaded;
 
-class GenerateVideoThumbnail
+class GenerateVideoThumbnail implements ShouldQueue
 {
+    /**
+     * The time (seconds) before the job should be processed.
+     *
+     * @var int
+     */
+    public $delay = 5;
+
     /**
      * Create the event listener.
      *
@@ -30,6 +37,9 @@ class GenerateVideoThumbnail
         $video = $event->video;
         $video_public_path = $video->public_path;
         $video_thumb_path = $this->generateThumbnail($video_public_path);
+
+        $video->thumb_path = $video_thumb_path;
+        $video->save();
     }
 
     protected function generateThumbnail($path)
