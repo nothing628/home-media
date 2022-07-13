@@ -1,5 +1,5 @@
 <x-auth-layout>
-    <div class="max-w-[335px] w-full m-auto box-border">
+    <div class="max-w-[335px] m-auto box-border">
         <div class="mb-12 pt-6 text-center">
             <img src="img/favicon.png" class="h-auto max-w-full" alt="LOGO">
             <h5 class="mt-4 mb-4 text-black text-xl font-medium">Welcome to Aria</h5>

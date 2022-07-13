@@ -630,6 +630,9 @@ select {
 .z-50 {
   z-index: 50;
 }
+.float-left {
+  float: left;
+}
 .m-auto {
   margin: auto;
 }
@@ -640,6 +643,10 @@ select {
 .mx-0 {
   margin-left: 0px;
   margin-right: 0px;
+}
+.mx-0\.5 {
+  margin-left: 0.125rem;
+  margin-right: 0.125rem;
 }
 .mt-3 {
   margin-top: 0.75rem;
@@ -712,6 +719,15 @@ select {
 }
 .mb-\[5px\] {
   margin-bottom: 5px;
+}
+.mt-5 {
+  margin-top: 1.25rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 .box-border {
   box-sizing: border-box;
@@ -824,6 +840,9 @@ select {
 .max-w-7xl {
   max-width: 80rem;
 }
+.max-w-\[561px\] {
+  max-width: 561px;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -863,6 +882,16 @@ select {
 }
 .cursor-default {
   cursor: default;
+}
+.touch-pan-y {
+  --tw-pan-y: pan-y;
+  touch-action: var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom);
+}
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .list-inside {
   list-style-position: inside;
@@ -921,6 +950,9 @@ select {
 }
 .rounded-full {
   border-radius: 9999px;
+}
+.rounded-\[50px\] {
+  border-radius: 50px;
 }
 .rounded-l-md {
   border-top-left-radius: 0.375rem;
@@ -1036,6 +1068,10 @@ select {
 .bg-transparent {
   background-color: transparent;
 }
+.bg-\[\#dcdcdc\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 220 220 / var(--tw-bg-opacity));
+}
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -1043,8 +1079,15 @@ select {
   --tw-gradient-from: #07bf67;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(7 191 103 / 0));
 }
+.from-\[\#ff516b\] {
+  --tw-gradient-from: #ff516b;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(255 81 107 / 0));
+}
 .to-\[\#0cded5\] {
   --tw-gradient-to: #0cded5;
+}
+.to-\[\#826cfd\] {
+  --tw-gradient-to: #826cfd;
 }
 .bg-contain {
   background-size: contain;
@@ -1066,6 +1109,9 @@ select {
 }
 .p-2 {
   padding: 0.5rem;
+}
+.p-5 {
+  padding: 1.25rem;
 }
 .py-4 {
   padding-top: 1rem;
@@ -1118,6 +1164,10 @@ select {
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+.py-\[11px\] {
+  padding-top: 11px;
+  padding-bottom: 11px;
 }
 .pt-20 {
   padding-top: 5rem;
