@@ -2,6 +2,12 @@
 import { ref, computed, useSlots, onMounted, onBeforeUnmount } from 'vue'
 import SliderSelector from './selector.vue'
 
+const props = defineProps({
+    interval: {
+        type: Number,
+        default: 2000
+    }
+})
 const container = ref()
 const containerWidth = ref(0)
 const totalPages = ref(1)
@@ -23,7 +29,7 @@ const moveNextPage = () => {
     currentPage.value = nextPage
 }
 const startTimer = () => {
-    let id = setInterval(moveNextPage, 2000)
+    let id = setInterval(moveNextPage, props.interval)
 
     timerId.value = id
 }
