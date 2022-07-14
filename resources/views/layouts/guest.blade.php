@@ -26,7 +26,11 @@
         <div class="flex">
             <x-sidebar></x-sidebar>
             <x-content>
+                @if(isset($slot))
                 {{ $slot }}
+                @endif
+
+                @yield('content')
             </x-content>
         </div>
     </div>
