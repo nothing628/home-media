@@ -1,14 +1,32 @@
-<div class="w-64 bg-gray-50 h-full absolute top-0 left-0 bottom-0 z-0 pb-4 pt-20 hidden md:block">
-    <div class="flex flex-col">
-        <a href="{{ route('home') }}"
-            class="text-lg border-b border-b-gray-200 border-t border-t-gray-200 hover:bg-gray-200 py-2 px-4 cursor-pointer">
-            <i class="far fa-home mr-2 w-6"></i>Home
-        </a>
-        <a class="text-lg border-b border-b-gray-200 py-2 px-4 hover:bg-gray-200 cursor-pointer">
-            <i class="far fa-compass mr-2 w-6"></i>Category
-        </a>
-        <a class="text-lg border-b border-b-gray-200 py-2 px-4 hover:bg-gray-200 cursor-pointer">
-            <i class="far fa-bookmark mr-2 w-6"></i>Favorite
-        </a>
-    </div>
-</div>
+<ul
+    class="flex flex-col mb-0 list-none fixed py-0.5 z-[9] min-h-full w-[90px] from-[#07bf67] to-[#0cded5] bg-gradient-to-br md:w-[225px] md:h-full">
+    <x-sidebar.menu-item title="Home" href="#" active>
+        <i class="fas fa-fw fa-home"></i>
+    </x-sidebar.menu-item>
+    <x-sidebar.menu-item title="Channels" href="#">
+        <i class="fas fa-fw fa-users"></i>
+    </x-sidebar.menu-item>
+    <x-sidebar.menu-item title="Upload Video" href="#">
+        <i class="fas fa-fw fa-cloud-upload-alt"></i>
+    </x-sidebar.menu-item>
+    <x-sidebar.menu-item title="History" href="#">
+        <i class="fas fa-fw fa-history"></i>
+    </x-sidebar.menu-item>
+    <x-sidebar.menu-item title="Categories" href="#">
+        <i class="fas fa-fw fa-list-alt"></i>
+
+        <x-slot:dropdown>
+            <x-sidebar.dropdown-item href="">Movie</x-sidebar.dropdown-item>
+            <x-sidebar.dropdown-item href="">Music</x-sidebar.dropdown-item>
+            <x-sidebar.dropdown-item href="">Television</x-sidebar.dropdown-item>
+        </x-slot:dropdown>
+    </x-sidebar.menu-item>
+    <li class="border-t border-t-[#07af57] py-[7px] px-[14px] mt-1.5 mb-4">
+        <h6 class="text-white text-sm font-semibold mb-[15px] mt-[9px]">SUBSCRIPTIONS</h6>
+        <ul>
+            <x-sidebar.subscribe-item notify-count="0" img="{{ asset('images/login.png')}}" href="" title="Your Life"></x-sidebar.subscribe-item>
+            <x-sidebar.subscribe-item notify-count="2" img="{{ asset('images/login.png')}}" href="" title="Unboxing"></x-sidebar.subscribe-item>
+            <x-sidebar.subscribe-item notify-count="0" img="{{ asset('images/login.png')}}" href="" title="Product / Service"></x-sidebar.subscribe-item>
+        </ul>
+    </li>
+</ul>
