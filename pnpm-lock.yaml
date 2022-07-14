@@ -20,10 +20,12 @@ specifiers:
   typescript: ^4.6.4
   vue: ^3.2.35
   vue-loader: ^16.2.0
+  vue-router: '4'
 
 dependencies:
   dropzone: registry.npmjs.org/dropzone/6.0.0-beta.2
   vue: 3.2.35
+  vue-router: registry.npmjs.org/vue-router/4.1.2_vue@3.2.35
 
 devDependencies:
   '@tailwindcss/forms': 0.4.1_tailwindcss@3.0.24
@@ -5912,6 +5914,12 @@ packages:
     version: 0.2.14
     dev: false
 
+  registry.npmjs.org/@vue/devtools-api/6.2.1:
+    resolution: {integrity: sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.2.1.tgz}
+    name: '@vue/devtools-api'
+    version: 6.2.1
+    dev: false
+
   registry.npmjs.org/dropzone/6.0.0-beta.2:
     resolution: {integrity: sha512-k44yLuFFhRk53M8zP71FaaNzJYIzr99SKmpbO/oZKNslDjNXQsBTdfLs+iONd0U0L94zzlFzRnFdqbLcs7h9fQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/dropzone/-/dropzone-6.0.0-beta.2.tgz}
     name: dropzone
@@ -5942,4 +5950,16 @@ packages:
     resolution: {integrity: sha512-b+z6yF1d4EOyDgylzQo5IminlUmzSeqR1hs/bzjBNjuGras4FXq/6TrzjxfN0j+TmI0ltJzTNlqXUMCniciwKQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/just-extend/-/just-extend-5.1.1.tgz}
     name: just-extend
     version: 5.1.1
+    dev: false
+
+  registry.npmjs.org/vue-router/4.1.2_vue@3.2.35:
+    resolution: {integrity: sha512-5BP1qXFncVRwgV/XnqzsKApdMjQPqWIpoUBdL1ynz8HyLxIX/UDAx7Ql2BjmA5CXT/p61JfZvkpiFWFpaqcfag==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/vue-router/-/vue-router-4.1.2.tgz}
+    id: registry.npmjs.org/vue-router/4.1.2
+    name: vue-router
+    version: 4.1.2
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': registry.npmjs.org/@vue/devtools-api/6.2.1
+      vue: 3.2.35
     dev: false
