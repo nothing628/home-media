@@ -21,9 +21,9 @@
 
 <body>
 
-    <div class="font-sans text-gray-900 antialiased" id="app">
+    <div class="" id="app">
         <x-header></x-header>
-        <div class="block relative min-h-screen pt-16">
+        <div class="flex">
             <x-sidebar></x-sidebar>
             <x-content>
                 {{ $slot }}
