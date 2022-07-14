@@ -1,3 +1,7 @@
-<div class="ml-0 md:ml-64 px-6 py-6">
-    {{ $slot }}
+<div class="overflow-x-hidden w-full">
+    <div class="pl-[108px] pr-[15px] pb-[15px] pt-4 md:pl-[243px] xl:py-[30px] xl:pl-[255px] xl:pr-[30px] w-full mx-auto">
+        {{ $slot }}
+    </div>
+
+    <x-footer></x-footer>
 </div>

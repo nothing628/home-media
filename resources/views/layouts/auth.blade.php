@@ -21,13 +21,17 @@
 
 <body>
 
-    <div class="" id="app">
-        <x-header></x-header>
-        <div class="flex">
-            <x-sidebar></x-sidebar>
-            <x-content>
-                {{ $slot }}
-            </x-content>
+    <div class="h-screen bg-gradient-to-br from-[#07bf67] to-[#0cded5]" id="app">
+        <div class="px-0 w-full mx-auto">
+            <div class="mx-0 flex flex-wrap">
+                <div
+                    class="h-screen p-12 bg-white flex-shrink-0 flex-grow-0 md:basis-5/12 relative w-full md:w-5/12">
+                    {{ $slot }}
+                </div>
+                <div class="flex-shrink-0 flex-grow-0 md:basis-7/12 relative w-full md:w-7/12">
+                    <x-auth.right-decoration></x-auth.right-decoration>
+                </div>
+            </div>
         </div>
     </div>
 </body>
