@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@tailwindcss/forms': ^0.4.0
-  '@types/dropzone': ^5.7.4
   '@types/lodash': ^4.14.182
   '@vue/compiler-sfc': ^3.2.35
   alpinejs: ^3.4.2
@@ -32,7 +31,6 @@ dependencies:
 
 devDependencies:
   '@tailwindcss/forms': 0.4.1_tailwindcss@3.0.24
-  '@types/dropzone': registry.npmjs.org/@types/dropzone/5.7.4
   '@types/lodash': 4.14.182
   '@vue/compiler-sfc': 3.2.35
   alpinejs: 3.10.2
@@ -5916,28 +5914,6 @@ packages:
     name: '@swc/helpers'
     version: 0.2.14
     dev: false
-
-  registry.npmjs.org/@types/dropzone/5.7.4:
-    resolution: {integrity: sha512-9kLJ2YAmVRWYrHvDoa95pQzHF0HUMKcznsS7FM1Mht5Yieec+HMB6Ybfm+ocvLjvFCvgyYGFTp4nzNFxhZmo3g==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@types/dropzone/-/dropzone-5.7.4.tgz}
-    name: '@types/dropzone'
-    version: 5.7.4
-    dependencies:
-      '@types/jquery': registry.npmjs.org/@types/jquery/3.5.14
-    dev: true
-
-  registry.npmjs.org/@types/jquery/3.5.14:
-    resolution: {integrity: sha512-X1gtMRMbziVQkErhTQmSe2jFwwENA/Zr+PprCkF63vFq+Yt5PZ4AlKqgmeNlwgn7dhsXEK888eIW2520EpC+xg==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@types/jquery/-/jquery-3.5.14.tgz}
-    name: '@types/jquery'
-    version: 3.5.14
-    dependencies:
-      '@types/sizzle': registry.npmjs.org/@types/sizzle/2.3.3
-    dev: true
-
-  registry.npmjs.org/@types/sizzle/2.3.3:
-    resolution: {integrity: sha512-JYM8x9EGF163bEyhdJBpR2QX1R5naCJHC8ucJylJ3w9/CVBaskdQ8WqBf8MmQrd1kRvp/a4TS8HJ+bxzR7ZJYQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@types/sizzle/-/sizzle-2.3.3.tgz}
-    name: '@types/sizzle'
-    version: 2.3.3
-    dev: true
 
   registry.npmjs.org/@vue/devtools-api/6.2.1:
     resolution: {integrity: sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.2.1.tgz}

@@ -1,5 +1,5 @@
-import { defineStore, storeToRefs } from "pinia";
-import Dropzone, { DropzoneFile } from "dropzone";
+import { defineStore } from "pinia";
+import Dropzone from "dropzone";
 
 Dropzone.autoDiscover = false;
 
@@ -38,11 +38,8 @@ export const useUploadStore = defineStore<
             const files = inputElement.files;
 
             for (let i = 0; i < files.length; i++) {
-                const currentFile = files.item(i);
-
-                // dropzone.addFile(currentFile)
-
-                console.log(currentFile, "selected");
+                const currentFile: any = files.item(i);
+                dropzone.addFile(currentFile);
             }
         },
         async initDropzone(elementSelector: string) {
@@ -61,6 +58,7 @@ export const useUploadStore = defineStore<
                 url: "/api/upload",
                 autoProcessQueue: true,
                 autoQueue: true,
+                disablePreviews: true,
             });
 
             this.dropzone = dropzone;

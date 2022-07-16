@@ -10,7 +10,11 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["resources/js/*"],
-        }
+        },
+        "typeRoots": [
+            "./resources/js/types",
+            "./node_modules/@types",
+        ]
     },
     "exclude": ["node_modules", "public"],
     "include": [
