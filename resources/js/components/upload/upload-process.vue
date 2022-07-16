@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useUploadStore } from '@/stores/upload'
+
+const uploadStore = useUploadStore()
+const { title, description } = storeToRefs(uploadStore)
+
+</script>
+
 <template>
     <div>
         <div class="flex flex-wrap -mx-[15px]">
@@ -35,15 +44,14 @@
                         <div class="relative w-full px-[15px] lg:w-full lg:flex-shrink-0 lg:flex-grow-0 lg:basis-full">
                             <div class="mb-4">
                                 <label class="text-xs font-semibold mb-[5px] inline-block" for="e1">Video Title</label>
-                                <input type="text" placeholder="Contrary to popular belief, Lorem Ipsum (2020) is not."
-                                    id="e1"
+                                <input type="text" placeholder="Eg: Lorem Ipsum (2020) is not." v-model="title" id="e1"
                                     class="block w-full py-1.5 px-3 text-[#495057] text-[13px] leading-normal border border-[#dcdfdf] rounded-sm bg-[#eceff0]">
                             </div>
                         </div>
                         <div class="relative w-full px-[15px] lg:w-full lg:flex-shrink-0 lg:flex-grow-0 lg:basis-full">
                             <div class="mb-4">
                                 <label class="text-xs font-semibold mb-[5px] inline-block" for="e2">About</label>
-                                <textarea rows="3" id="e2" name="e2"
+                                <textarea rows="3" id="e2" name="e2" v-model="description"
                                     class="block w-full py-1.5 px-3 text-[#495057] text-[13px] leading-normal border border-[#dcdfdf] rounded-sm bg-[#eceff0]">Description</textarea>
                             </div>
                         </div>

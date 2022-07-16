@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@tailwindcss/forms': ^0.4.0
+  '@types/dropzone': ^5.7.4
   '@types/lodash': ^4.14.182
   '@vue/compiler-sfc': ^3.2.35
   alpinejs: ^3.4.2
@@ -10,6 +11,7 @@ specifiers:
   dropzone: 6.0.0-beta.2
   laravel-mix: ^6.0.6
   lodash: ^4.17.19
+  pinia: ^2.0.16
   postcss: ^8.4.6
   postcss-import: ^14.0.2
   resolve-url-loader: ^5.0.0
@@ -24,11 +26,13 @@ specifiers:
 
 dependencies:
   dropzone: registry.npmjs.org/dropzone/6.0.0-beta.2
+  pinia: registry.npmjs.org/pinia/2.0.16_4nej522qscl2iwygtb75pjp4ie
   vue: 3.2.35
   vue-router: registry.npmjs.org/vue-router/4.1.2_vue@3.2.35
 
 devDependencies:
   '@tailwindcss/forms': 0.4.1_tailwindcss@3.0.24
+  '@types/dropzone': registry.npmjs.org/@types/dropzone/5.7.4
   '@types/lodash': 4.14.182
   '@vue/compiler-sfc': 3.2.35
   alpinejs: 3.10.2
@@ -5482,7 +5486,6 @@ packages:
     resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /unicode-canonical-property-names-ecmascript/2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}
@@ -5914,6 +5917,28 @@ packages:
     version: 0.2.14
     dev: false
 
+  registry.npmjs.org/@types/dropzone/5.7.4:
+    resolution: {integrity: sha512-9kLJ2YAmVRWYrHvDoa95pQzHF0HUMKcznsS7FM1Mht5Yieec+HMB6Ybfm+ocvLjvFCvgyYGFTp4nzNFxhZmo3g==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@types/dropzone/-/dropzone-5.7.4.tgz}
+    name: '@types/dropzone'
+    version: 5.7.4
+    dependencies:
+      '@types/jquery': registry.npmjs.org/@types/jquery/3.5.14
+    dev: true
+
+  registry.npmjs.org/@types/jquery/3.5.14:
+    resolution: {integrity: sha512-X1gtMRMbziVQkErhTQmSe2jFwwENA/Zr+PprCkF63vFq+Yt5PZ4AlKqgmeNlwgn7dhsXEK888eIW2520EpC+xg==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@types/jquery/-/jquery-3.5.14.tgz}
+    name: '@types/jquery'
+    version: 3.5.14
+    dependencies:
+      '@types/sizzle': registry.npmjs.org/@types/sizzle/2.3.3
+    dev: true
+
+  registry.npmjs.org/@types/sizzle/2.3.3:
+    resolution: {integrity: sha512-JYM8x9EGF163bEyhdJBpR2QX1R5naCJHC8ucJylJ3w9/CVBaskdQ8WqBf8MmQrd1kRvp/a4TS8HJ+bxzR7ZJYQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@types/sizzle/-/sizzle-2.3.3.tgz}
+    name: '@types/sizzle'
+    version: 2.3.3
+    dev: true
+
   registry.npmjs.org/@vue/devtools-api/6.2.1:
     resolution: {integrity: sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.2.1.tgz}
     name: '@vue/devtools-api'
@@ -5950,6 +5975,45 @@ packages:
     resolution: {integrity: sha512-b+z6yF1d4EOyDgylzQo5IminlUmzSeqR1hs/bzjBNjuGras4FXq/6TrzjxfN0j+TmI0ltJzTNlqXUMCniciwKQ==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/just-extend/-/just-extend-5.1.1.tgz}
     name: just-extend
     version: 5.1.1
+    dev: false
+
+  registry.npmjs.org/pinia/2.0.16_4nej522qscl2iwygtb75pjp4ie:
+    resolution: {integrity: sha512-9/LMVO+/epny1NBfC77vnps4g3JRezxhhoF1xLUk8mZkUIxVnwfEAIRiAX8mYBTD/KCwZqnDMqXc8w3eU0FQGg==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/pinia/-/pinia-2.0.16.tgz}
+    id: registry.npmjs.org/pinia/2.0.16
+    name: pinia
+    version: 2.0.16
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': registry.npmjs.org/@vue/devtools-api/6.2.1
+      typescript: 4.6.4
+      vue: 3.2.35
+      vue-demi: registry.npmjs.org/vue-demi/0.13.5_vue@3.2.35
+    dev: false
+
+  registry.npmjs.org/vue-demi/0.13.5_vue@3.2.35:
+    resolution: {integrity: sha512-tO3K2bML3AwiHmVHeKCq6HLef2st4zBXIV5aEkoJl6HZ+gJWxWv2O8wLH8qrA3SX3lDoTDHNghLX1xZg83MXvw==, registry: https://packagecloud.io/github/git-lfs/npm/, tarball: https://registry.npmjs.org/vue-demi/-/vue-demi-0.13.5.tgz}
+    id: registry.npmjs.org/vue-demi/0.13.5
+    name: vue-demi
+    version: 0.13.5
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.35
     dev: false
 
   registry.npmjs.org/vue-router/4.1.2_vue@3.2.35:

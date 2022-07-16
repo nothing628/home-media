@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { useUploadStore } from '@/stores/upload'
 
 const router = useRouter()
+const uploadStore = useUploadStore()
 
 const upload = () => {
-    router.push('/process')
+    uploadStore.openSelectDialog()
+    // router.push('/process')
 }
 </script>
 

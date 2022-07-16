@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",
+        "@types/dropzone": "^5.7.4",
         "@types/lodash": "^4.14.182",
         "@vue/compiler-sfc": "^3.2.35",
         "alpinejs": "^3.4.2",
@@ -30,6 +31,7 @@
     },
     "dependencies": {
         "dropzone": "6.0.0-beta.2",
+        "pinia": "^2.0.16",
         "vue": "^3.2.35",
         "vue-router": "4"
     }
