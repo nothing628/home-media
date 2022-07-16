@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="relative w-full px-[15px] lg:w-1/6 lg:flex-shrink-0 lg:flex-grow-0 lg:basis-1/6">
-                <div class="w-full h-[94px] rounded-[3px] bg-[#8781bd]"></div>
+                <div class="w-full pt-[56%] rounded-[3px] bg-[#8781bd]"></div>
             </div>
             <div class="relative w-full px-[15px] lg:w-5/6 lg:flex-shrink-0 lg:flex-grow-0 lg:basis-5/6">
                 <div class="text-black font-semibold">Contrary to popular belief, Lorem Ipsum (2020) is not.</div>
