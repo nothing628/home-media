@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\VideoProcessor\Base;
 use App\Models\Video;
 use App\Events\VideoUploaded;
 
@@ -32,6 +33,7 @@ class VideoController extends Controller
         ]);
         $isLastChunk = $data['dzchunkindex'] + 1 == $data['dztotalchunkcount'];
         $file = $request->file('file');
+        $videoModel = $this->getOrCreateVideoModel($data['dzuuid']);
 
         try {
             $chunkFilename = $data['dzuuid'];
@@ -40,16 +42,21 @@ class VideoController extends Controller
             $this->appendFile($file->getPathname(), $chunkFileDestination, $data['dzchunkbyteoffset']);
 
             if ($isLastChunk) {
-                $filename = $file->getClientOriginalName();
+                $fileExt = $file->extension();
+                $filename = $file->getFilename() . "." . $fileExt;
                 $fileRelative = 'app/public/' . $filename;
                 $filepath = storage_path($fileRelative);
 
                 // move chunk file destination to real file name
                 $this->renameFile($chunkFileDestination, $filepath);
+                $videoModel->filepath = $filepath;
+                $videoModel->status = Base::VIDEO_COMPLETE;
+                $videoModel->save();
 
                 return response()->json([
                     'success' => true,
-                    'filename' => $fileRelative
+                    'filename' => $fileRelative,
+                    'video' => $videoModel
                 ]);
             }
         } catch (\Exception $ex) {
@@ -57,8 +64,32 @@ class VideoController extends Controller
         }
 
         return response()->json([
-            'success' => true
+            'success' => true,
+            'video' => $videoModel
         ]);
+    }
+
+    protected function getOrCreateVideoModel($uploadId)
+    {
+        $video = Video::where('upload_id', $uploadId)
+            ->first();
+
+        if ($video) return $video;
+
+        $video = $this->createVideoModel($uploadId);
+
+        return $video;
+    }
+
+    protected function createVideoModel($uploadId)
+    {
+        $video = new Video();
+        $video->title = '';
+        $video->upload_id = $uploadId;
+        $video->status = Base::VIDEO_UPLOADING;
+        $video->save();
+
+        return $video;
     }
 
     protected function renameFile($sourceFile, $destinationFile)

@@ -35,7 +35,7 @@ watch(is_file_added, (after, before) => {
 <template>
     <div>
         <form id="dropzone">
-            <input type="file" multiple name="files" class="hidden" />
+            <input type="file" name="files" class="hidden" accept="video/*" />
         </form>
         <div v-if="error_message" class="">
             <p>{{ error_message }}</p>

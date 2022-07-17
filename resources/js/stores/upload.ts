@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { get } from "lodash";
 import Dropzone from "dropzone";
 
 Dropzone.autoDiscover = false;
@@ -8,6 +9,7 @@ type UploadStoreState = {
     description: string;
     error_message: string;
     progress: number;
+    video_id: string | null;
     is_file_added: boolean;
     is_complete: boolean;
     dropzone: Dropzone | null;
@@ -29,6 +31,7 @@ export const useUploadStore = defineStore<
         title: "",
         description: "",
         error_message: "",
+        video_id: null,
         progress: 0,
         is_file_added: false,
         is_complete: false,
@@ -67,7 +70,7 @@ export const useUploadStore = defineStore<
                 autoProcessQueue: true,
                 autoQueue: true,
                 chunking: true,
-                chunkSize: 1024 * 128,
+                chunkSize: 1024 * 256,
                 forceChunking: true,
                 disablePreviews: true,
             });
@@ -86,8 +89,7 @@ export const useUploadStore = defineStore<
 
             dropzone.on("success", (_, response) => {
                 this.is_complete = true;
-
-                console.log(response);
+                this.video_id = get(response, "video.id");
             });
 
             dropzone.on("addedfile", (_) => {
