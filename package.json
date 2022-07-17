@@ -29,6 +29,9 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
-        "vue": "^3.2.35"
+        "dropzone": "6.0.0-beta.2",
+        "pinia": "^2.0.16",
+        "vue": "^3.2.35",
+        "vue-router": "4"
     }
 }
