@@ -42,7 +42,9 @@ class VideoController extends Controller
             $this->appendFile($file->getPathname(), $chunkFileDestination, $data['dzchunkbyteoffset']);
 
             if ($isLastChunk) {
-                $fileExt = $file->extension();
+                $originalName = $file->getClientOriginalName();
+                $originalPathinfo = pathinfo($originalName);
+                $fileExt = $originalPathinfo['extension'];
                 $filename = $file->getFilename() . "." . $fileExt;
                 $fileRelative = 'app/public/' . $filename;
                 $filepath = storage_path($fileRelative);
