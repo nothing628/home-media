@@ -7,7 +7,9 @@ type UploadStoreState = {
     title: string;
     description: string;
     error_message: string;
-    file_added: boolean;
+    progress: number;
+    is_file_added: boolean;
+    is_complete: boolean;
     dropzone: Dropzone | null;
 };
 
@@ -27,7 +29,9 @@ export const useUploadStore = defineStore<
         title: "",
         description: "",
         error_message: "",
-        file_added: false,
+        progress: 0,
+        is_file_added: false,
+        is_complete: false,
         dropzone: null,
     }),
     actions: {
@@ -70,15 +74,25 @@ export const useUploadStore = defineStore<
 
             dropzone.on("error", (file, message) => {
                 dropzone.removeFile(file);
-                this.file_added = false;
+                this.is_file_added = false;
 
                 if (typeof message == "string") this.error_message = message;
                 else this.error_message = message.message;
             });
 
+            dropzone.on("uploadprogress", (_file, progress, _) => {
+                this.progress = progress;
+            });
+
+            dropzone.on("success", (_, response) => {
+                this.is_complete = true;
+
+                console.log(response);
+            });
+
             dropzone.on("addedfile", (_) => {
                 this.error_message = "";
-                this.file_added = true;
+                this.is_file_added = true;
             });
 
             this.dropzone = dropzone;

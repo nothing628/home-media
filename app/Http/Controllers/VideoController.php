@@ -41,10 +41,16 @@ class VideoController extends Controller
 
             if ($isLastChunk) {
                 $filename = $file->getClientOriginalName();
-                $filepath = storage_path('app/public/' . $filename);
+                $fileRelative = 'app/public/' . $filename;
+                $filepath = storage_path($fileRelative);
 
                 // move chunk file destination to real file name
                 $this->renameFile($chunkFileDestination, $filepath);
+
+                return response()->json([
+                    'success' => true,
+                    'filename' => $fileRelative
+                ]);
             }
         } catch (\Exception $ex) {
             return response()->json(['message' => $ex->getMessage()], 400);

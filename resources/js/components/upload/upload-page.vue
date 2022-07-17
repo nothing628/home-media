@@ -8,7 +8,7 @@ import UploadProcess from './upload-process.vue'
 
 const router = useRouter()
 const uploadStore = useUploadStore()
-const { error_message, file_added } = storeToRefs(uploadStore)
+const { error_message, is_file_added } = storeToRefs(uploadStore)
 
 router.addRoute({
     path: '/',
@@ -26,7 +26,7 @@ onMounted(() => {
     uploadStore.initDropzone('form#dropzone')
 })
 
-watch(file_added, (before, after) => {
+watch(is_file_added, (after, before) => {
     if (after)
         router.push('/process')
 })

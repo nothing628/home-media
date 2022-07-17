@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useUploadStore } from '@/stores/upload'
 
 const uploadStore = useUploadStore()
-const { title, description } = storeToRefs(uploadStore)
+const { title, description, progress, is_complete } = storeToRefs(uploadStore)
 
 </script>
 
@@ -23,15 +23,17 @@ const { title, description } = storeToRefs(uploadStore)
                 <div class="text-[11px]">102.6 MB . 2:13 MIN Remaining</div>
                 <div class="progress">
                     <div class="my-[14px] h-2 rounded-sm flex overflow-hidden text-xs bg-[#e9ecef]">
-                        <div class="w-3/4 bg-[#07bf67] flex flex-col justify-center overflow-hidden text-white text-center whitespace-nowrap progressbar-content-bg-animated"
-                            role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                            style="width: 75%"></div>
+                        <div class="w-3/4 bg-[#07bf67] flex flex-col justify-center overflow-hidden text-white text-center whitespace-nowrap"
+                            :class="is_complete ? '' : 'progressbar-content-bg-animated'" role="progressbar"
+                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                            :style="{ width: progress.toFixed(2) + '%' }"></div>
                     </div>
                     <div class="absolute right-[18px] top-0">
                         <a href="#"><i class="fas fa-times-circle"></i></a>
                     </div>
                 </div>
-                <div class="text-[12px] opacity-70">Your Video is still uploading, please keep this page open until it's
+                <div v-if="is_complete" class="text-[12px] opacity-70">Your Video is uploaded!</div>
+                <div v-else class="text-[12px] opacity-70">Your Video is still uploading, please keep this page open until it's
                     done.
                 </div>
             </div>
