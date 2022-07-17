@@ -7,7 +7,6 @@ const uploadStore = useUploadStore()
 
 const upload = () => {
     uploadStore.openSelectDialog()
-    // router.push('/process')
 }
 </script>
 

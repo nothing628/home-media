@@ -7,6 +7,7 @@ type UploadStoreState = {
     title: string;
     description: string;
     error_message: string;
+    file_added: boolean;
     dropzone: Dropzone | null;
 };
 
@@ -26,6 +27,7 @@ export const useUploadStore = defineStore<
         title: "",
         description: "",
         error_message: "",
+        file_added: false,
         dropzone: null,
     }),
     actions: {
@@ -68,6 +70,7 @@ export const useUploadStore = defineStore<
 
             dropzone.on("error", (file, message) => {
                 dropzone.removeFile(file);
+                this.file_added = false;
 
                 if (typeof message == "string") this.error_message = message;
                 else this.error_message = message.message;
@@ -75,6 +78,7 @@ export const useUploadStore = defineStore<
 
             dropzone.on("addedfile", (_) => {
                 this.error_message = "";
+                this.file_added = true;
             });
 
             this.dropzone = dropzone;

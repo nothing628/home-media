@@ -30,13 +30,52 @@ class VideoController extends Controller
             'dztotalchunkcount',
             'dzchunkbyteoffset',
         ]);
+        $isLastChunk = $data['dzchunkindex'] + 1 == $data['dztotalchunkcount'];
         $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
 
-        dd($data, $fileName);
+        try {
+            $chunkFilename = $data['dzuuid'];
+            $chunkFileDestination = storage_path('app/public/' . $chunkFilename);
+
+            $this->appendFile($file->getPathname(), $chunkFileDestination, $data['dzchunkbyteoffset']);
+
+            if ($isLastChunk) {
+                $filename = $file->getClientOriginalName();
+                $filepath = storage_path('app/public/' . $filename);
+
+                // move chunk file destination to real file name
+                $this->renameFile($chunkFileDestination, $filepath);
+            }
+        } catch (\Exception $ex) {
+            return response()->json(['message' => $ex->getMessage()], 400);
+        }
+
         return response()->json([
             'success' => true
         ]);
+    }
+
+    protected function renameFile($sourceFile, $destinationFile)
+    {
+        $isSuccess = rename($sourceFile, $destinationFile);
+
+        if (!$isSuccess) {
+            throw new \Exception("Failed to rename uploaded file to real name");
+        }
+    }
+
+    protected function appendFile($sourceFile, $destinationFile, $offset)
+    {
+        $destinationHandle = fopen($destinationFile, 'a+b');
+        $sourceHandle = fopen($sourceFile, 'rb');
+        $sourceSize = filesize($sourceFile);
+        $sourceData = fread($sourceHandle, $sourceSize);
+
+        fseek($destinationHandle, $offset);
+        fwrite($destinationHandle, $sourceData, $sourceSize);
+
+        fclose($sourceHandle);
+        fclose($destinationHandle);
     }
 
     protected function storeVideoFile($file)
