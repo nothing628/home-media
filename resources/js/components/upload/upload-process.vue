@@ -3,8 +3,11 @@ import { storeToRefs } from 'pinia'
 import { useUploadStore } from '@/stores/upload'
 
 const uploadStore = useUploadStore()
-const { title, description, progress, is_complete } = storeToRefs(uploadStore)
+const { title, description, progress, is_complete, file_remain, file_size } = storeToRefs(uploadStore)
 
+const handleCancel = () => {
+    uploadStore.stopUpload()
+}
 </script>
 
 <template>
@@ -29,11 +32,12 @@ const { title, description, progress, is_complete } = storeToRefs(uploadStore)
                             :style="{ width: progress.toFixed(2) + '%' }"></div>
                     </div>
                     <div class="absolute right-[18px] top-0">
-                        <a href="#"><i class="fas fa-times-circle"></i></a>
+                        <button class="text-[#07bf67]" @click="handleCancel"><i class="fas fa-times-circle"></i></button>
                     </div>
                 </div>
                 <div v-if="is_complete" class="text-[12px] opacity-70">Your Video is uploaded!</div>
-                <div v-else class="text-[12px] opacity-70">Your Video is still uploading, please keep this page open until it's
+                <div v-else class="text-[12px] opacity-70">Your Video is still uploading, please keep this page open
+                    until it's
                     done.
                 </div>
             </div>

@@ -28,7 +28,9 @@ onMounted(() => {
 
 watch(is_file_added, (after, before) => {
     if (after)
-        router.push('/process')
+        router.replace('/process')
+    else
+        router.replace('/')
 })
 </script>
 

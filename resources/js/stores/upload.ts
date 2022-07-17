@@ -9,6 +9,8 @@ type UploadStoreState = {
     description: string;
     error_message: string;
     progress: number;
+    file_size: number;
+    file_sent: number;
     video_id: string | null;
     is_file_added: boolean;
     is_complete: boolean;
@@ -19,12 +21,17 @@ type UploadStoreAction = {
     initDropzone: (element: string) => Promise<void>;
     openSelectDialog: () => Promise<void> | void;
     onFileSelected: () => void;
+    stopUpload: () => Promise<void> | void;
 };
+
+type UploadStoreGetter = {
+    file_remain: (state: UploadStoreState) => number;
+}
 
 export const useUploadStore = defineStore<
     "upload",
     UploadStoreState,
-    {},
+    UploadStoreGetter,
     UploadStoreAction
 >("upload", {
     state: () => ({
@@ -33,6 +40,8 @@ export const useUploadStore = defineStore<
         error_message: "",
         video_id: null,
         progress: 0,
+        file_size: 0,
+        file_sent: 0,
         is_file_added: false,
         is_complete: false,
         dropzone: null,
@@ -83,8 +92,10 @@ export const useUploadStore = defineStore<
                 else this.error_message = message.message;
             });
 
-            dropzone.on("uploadprogress", (_file, progress, _) => {
+            dropzone.on("uploadprogress", (file, progress, byteSent) => {
                 this.progress = progress;
+                this.file_size = file.size;
+                this.file_sent = byteSent;
             });
 
             dropzone.on("success", (_, response) => {
@@ -110,6 +121,27 @@ export const useUploadStore = defineStore<
 
             if (input) input.click();
         },
+        stopUpload() {
+            const dropzone: Dropzone = this.dropzone;
+            const files = dropzone.getFilesWithStatus("uploading");
+
+            if (files.length) {
+                dropzone.cancelUpload(files[0]);
+
+                this.is_file_added = false;
+                this.is_complete = false;
+                this.video_id = null;
+                this.progress = 0;
+            }
+        },
     },
-    getters: {},
+    getters: {
+        file_remain(state) {
+            const fileSize = state.file_size;
+            const fileSent = state.file_sent;
+            const fileRemain = fileSize - fileSent;
+
+            return fileRemain;
+        },
+    },
 });
