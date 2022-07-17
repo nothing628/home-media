@@ -20,6 +20,25 @@ class VideoController extends Controller
         return view('play', ['video' => $video, 'url' => $public_url]);
     }
 
+    public function handleUploadChunk(Request $request)
+    {
+        $data  = $request->only([
+            'dzuuid',
+            'dzchunkindex',
+            'dztotalfilesize',
+            'dzchunksize',
+            'dztotalchunkcount',
+            'dzchunkbyteoffset',
+        ]);
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+
+        dd($data, $fileName);
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
     protected function storeVideoFile($file)
     {
         if (is_null($file)) {

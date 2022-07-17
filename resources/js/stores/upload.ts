@@ -6,6 +6,7 @@ Dropzone.autoDiscover = false;
 type UploadStoreState = {
     title: string;
     description: string;
+    error_message: string;
     dropzone: Dropzone | null;
 };
 
@@ -24,6 +25,7 @@ export const useUploadStore = defineStore<
     state: () => ({
         title: "",
         description: "",
+        error_message: "",
         dropzone: null,
     }),
     actions: {
@@ -58,7 +60,21 @@ export const useUploadStore = defineStore<
                 url: "/api/upload",
                 autoProcessQueue: true,
                 autoQueue: true,
+                chunking: true,
+                chunkSize: 1024 * 128,
+                forceChunking: true,
                 disablePreviews: true,
+            });
+
+            dropzone.on("error", (file, message) => {
+                dropzone.removeFile(file);
+
+                if (typeof message == "string") this.error_message = message;
+                else this.error_message = message.message;
+            });
+
+            dropzone.on("addedfile", (_) => {
+                this.error_message = "";
             });
 
             this.dropzone = dropzone;
