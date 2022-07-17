@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useUploadStore } from '@/stores/upload'
+import { convertBytesToMb, convertSecondsToTimestamp } from '@/helper/upload'
 
 const uploadStore = useUploadStore()
-const { title, description, progress, is_complete, file_remain, file_size } = storeToRefs(uploadStore)
+const { title, description, progress, is_complete, file_sent, time_remain } = storeToRefs(uploadStore)
 
 const handleCancel = () => {
     uploadStore.stopUpload()
@@ -23,7 +24,7 @@ const handleCancel = () => {
             </div>
             <div class="relative w-full px-[15px] lg:w-5/6 lg:flex-shrink-0 lg:flex-grow-0 lg:basis-5/6">
                 <div class="text-black font-semibold">Contrary to popular belief, Lorem Ipsum (2020) is not.</div>
-                <div class="text-[11px]">102.6 MB . 2:13 MIN Remaining</div>
+                <div class="text-[11px]">{{ convertBytesToMb(file_sent) }} MB . {{ convertSecondsToTimestamp(time_remain) }} MIN Remaining</div>
                 <div class="progress">
                     <div class="my-[14px] h-2 rounded-sm flex overflow-hidden text-xs bg-[#e9ecef]">
                         <div class="w-3/4 bg-[#07bf67] flex flex-col justify-center overflow-hidden text-white text-center whitespace-nowrap"
@@ -32,7 +33,8 @@ const handleCancel = () => {
                             :style="{ width: progress.toFixed(2) + '%' }"></div>
                     </div>
                     <div class="absolute right-[18px] top-0">
-                        <button class="text-[#07bf67]" @click="handleCancel"><i class="fas fa-times-circle"></i></button>
+                        <button class="text-[#07bf67]" @click="handleCancel"><i
+                                class="fas fa-times-circle"></i></button>
                     </div>
                 </div>
                 <div v-if="is_complete" class="text-[12px] opacity-70">Your Video is uploaded!</div>

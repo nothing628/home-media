@@ -11,6 +11,8 @@ type UploadStoreState = {
     progress: number;
     file_size: number;
     file_sent: number;
+    time_start: number | null;
+    speed: number;
     video_id: string | null;
     is_file_added: boolean;
     is_complete: boolean;
@@ -26,14 +28,10 @@ type UploadStoreAction = {
 
 type UploadStoreGetter = {
     file_remain: (state: UploadStoreState) => number;
-}
+    time_remain: (state: UploadStoreState) => number;
+};
 
-export const useUploadStore = defineStore<
-    "upload",
-    UploadStoreState,
-    UploadStoreGetter,
-    UploadStoreAction
->("upload", {
+export const useUploadStore = defineStore("upload", {
     state: () => ({
         title: "",
         description: "",
@@ -42,6 +40,8 @@ export const useUploadStore = defineStore<
         progress: 0,
         file_size: 0,
         file_sent: 0,
+        time_start: null,
+        speed: 0,
         is_file_added: false,
         is_complete: false,
         dropzone: null,
@@ -93,14 +93,25 @@ export const useUploadStore = defineStore<
             });
 
             dropzone.on("uploadprogress", (file, progress, byteSent) => {
+                const currentTime = new Date().getTime();
                 this.progress = progress;
                 this.file_size = file.size;
+
+                if (this.time_start) {
+                    const deltaTime = currentTime - this.time_start;
+                    const deltaSize = byteSent - this.file_sent;
+
+                    this.speed = deltaSize / (deltaTime / 1000);
+                }
+
                 this.file_sent = byteSent;
+                this.time_start = currentTime;
             });
 
             dropzone.on("success", (_, response) => {
                 this.is_complete = true;
                 this.video_id = get(response, "video.id");
+                this.time_start = null;
             });
 
             dropzone.on("addedfile", (_) => {
@@ -143,5 +154,12 @@ export const useUploadStore = defineStore<
 
             return fileRemain;
         },
+        time_remain(state) {
+            const file_remain = this.file_remain;
+            const speed = state.speed;
+            const time_remain = file_remain / speed;
+
+            return time_remain;
+        }
     },
 });
