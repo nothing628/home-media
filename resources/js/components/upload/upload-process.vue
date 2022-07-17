@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import { useUploadStore } from '@/stores/upload'
 import { convertBytesToMb, convertSecondsToTimestamp } from '@/helper/upload'
 
+const router = useRouter()
 const uploadStore = useUploadStore()
 const { title, description, progress, is_complete, file_sent, time_remain } = storeToRefs(uploadStore)
 
 const handleCancel = () => {
     uploadStore.stopUpload()
+}
+
+const handleSubmit = () => {
+    uploadStore.submitVideo().then(() => {
+        router.replace('/success')
+    })
 }
 </script>
 
@@ -23,8 +31,10 @@ const handleCancel = () => {
                 <div class="w-full pt-[56%] rounded-[3px] bg-[#8781bd]"></div>
             </div>
             <div class="relative w-full px-[15px] lg:w-5/6 lg:flex-shrink-0 lg:flex-grow-0 lg:basis-5/6">
-                <div class="text-black font-semibold">Contrary to popular belief, Lorem Ipsum (2020) is not.</div>
-                <div class="text-[11px]">{{ convertBytesToMb(file_sent) }} MB . {{ convertSecondsToTimestamp(time_remain) }} MIN Remaining</div>
+                <div class="text-black font-semibold">{{ title }}</div>
+                <div class="text-[11px]">{{ convertBytesToMb(file_sent) }} MB . {{
+                        convertSecondsToTimestamp(time_remain)
+                }} MIN Remaining</div>
                 <div class="progress">
                     <div class="my-[14px] h-2 rounded-sm flex overflow-hidden text-xs bg-[#e9ecef]">
                         <div class="w-3/4 bg-[#07bf67] flex flex-col justify-center overflow-hidden text-white text-center whitespace-nowrap"
@@ -64,7 +74,7 @@ const handleCancel = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-wrap -mx-[15px]">
+                    <!-- <div class="flex flex-wrap -mx-[15px]">
                         <div class="relative w-full px-[15px] lg:w-full lg:flex-shrink-0 lg:flex-grow-0 lg:basis-full">
                             <div class="mb-4">
                                 <label class="text-xs font-semibold mb-[5px] inline-block" for="e3">Orientation</label>
@@ -78,8 +88,8 @@ const handleCancel = () => {
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex flex-wrap -mx-[15px]">
+                    </div> -->
+                    <!-- <div class="flex flex-wrap -mx-[15px]">
                         <div class="relative w-full px-[15px] lg:w-full lg:flex-shrink-0 lg:flex-grow-0 lg:basis-full">
                             <div>
                                 <h6 class="mb-4 text-[#333] text-base font-medium">Category ( you can select upto 6
@@ -163,11 +173,11 @@ const handleCancel = () => {
                                     for="zcustomCheck5">Leg</label>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="text-center mt-4">
-                    <button
-                        class="text-center text-[#07bf67] text-base leading-6 border border-[#07bf67] py-1.5 px-3">Save
+                    <button :disabled="!is_complete" @click="handleSubmit"
+                        class="text-center text-[#07bf67] text-base leading-6 border border-[#07bf67] py-1.5 px-3 disabled:bg-[#dcdfdf]">Save
                         Changes</button>
                 </div>
                 <hr class="my-4 border-0 border-t border-t-black/10 box-content">

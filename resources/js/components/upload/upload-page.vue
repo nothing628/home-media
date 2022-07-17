@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import { useUploadStore } from "@/stores/upload"
 import UploadHome from './upload-home.vue'
 import UploadProcess from './upload-process.vue'
+import UploadSuccess from './upload-success.vue'
 
 const router = useRouter()
 const uploadStore = useUploadStore()
@@ -19,6 +20,11 @@ router.addRoute({
     path: '/process',
     component: UploadProcess,
     name: 'upload-process'
+})
+router.addRoute({
+    path: '/success',
+    component: UploadSuccess,
+    name: 'upload-success'
 })
 router.push('/')
 

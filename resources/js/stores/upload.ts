@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import { get } from "lodash";
+import axios from "axios";
 import Dropzone from "dropzone";
+import type { GetterArgument } from "./base";
 
 Dropzone.autoDiscover = false;
 
@@ -16,6 +18,7 @@ type UploadStoreState = {
     video_id: string | null;
     is_file_added: boolean;
     is_complete: boolean;
+    is_loading: boolean;
     dropzone: Dropzone | null;
 };
 
@@ -24,14 +27,23 @@ type UploadStoreAction = {
     openSelectDialog: () => Promise<void> | void;
     onFileSelected: () => void;
     stopUpload: () => Promise<void> | void;
+    submitVideo: () => Promise<void>;
 };
 
-type UploadStoreGetter = {
-    file_remain: (state: UploadStoreState) => number;
-    time_remain: (state: UploadStoreState) => number;
-};
+// StoreGetters<UploadStoreState>
+// const UploadStoreGetter = {
+//     file_remain: (state: UploadStoreState) => number;
+//     time_remain: (state: UploadStoreState) => number;
+// } extends  = {};
 
-export const useUploadStore = defineStore("upload", {
+export const useUploadStore = defineStore<
+    "upload",
+    UploadStoreState,
+    {
+        time_remain: (state: GetterArgument<UploadStoreState>) => number;
+    },
+    UploadStoreAction
+>("upload", {
     state: () => ({
         title: "",
         description: "",
@@ -44,6 +56,7 @@ export const useUploadStore = defineStore("upload", {
         speed: 0,
         is_file_added: false,
         is_complete: false,
+        is_loading: false,
         dropzone: null,
     }),
     actions: {
@@ -79,7 +92,7 @@ export const useUploadStore = defineStore("upload", {
                 autoProcessQueue: true,
                 autoQueue: true,
                 chunking: true,
-                chunkSize: 1024 * 256,
+                chunkSize: 1024 * 512,
                 forceChunking: true,
                 disablePreviews: true,
             });
@@ -101,16 +114,20 @@ export const useUploadStore = defineStore("upload", {
                     const deltaTime = currentTime - this.time_start;
                     const deltaSize = byteSent - this.file_sent;
 
-                    this.speed = deltaSize / (deltaTime / 1000);
+                    if (deltaTime > 1000) {
+                        this.speed = deltaSize / (deltaTime / 1000);
+                        this.file_sent = byteSent;
+                        this.time_start = currentTime;
+                    }
+                } else {
+                    this.time_start = currentTime;
                 }
-
-                this.file_sent = byteSent;
-                this.time_start = currentTime;
             });
 
             dropzone.on("success", (_, response) => {
                 this.is_complete = true;
                 this.video_id = get(response, "video.id");
+                this.file_sent = this.file_size;
                 this.time_start = null;
             });
 
@@ -131,6 +148,29 @@ export const useUploadStore = defineStore("upload", {
                 elem.querySelector("input[type=file]");
 
             if (input) input.click();
+        },
+        async submitVideo() {
+            this.is_loading = true;
+
+            const videoId = this.video_id;
+            const postData = {
+                title: this.title,
+                description: this.description,
+            };
+
+            try {
+                const response = await axios.post(
+                    `/api/videos/${videoId}`,
+                    postData
+                );
+                const responseData = response.data;
+
+                console.log(responseData);
+            } catch (err) {
+                this.error_message = err.message;
+            } finally {
+                this.is_loading = false;
+            }
         },
         stopUpload() {
             const dropzone: Dropzone = this.dropzone;
@@ -160,6 +200,6 @@ export const useUploadStore = defineStore("upload", {
             const time_remain = file_remain / speed;
 
             return time_remain;
-        }
+        },
     },
 });

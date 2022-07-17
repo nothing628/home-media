@@ -73,14 +73,19 @@ class VideoController extends Controller
 
     protected function getOrCreateVideoModel($uploadId)
     {
-        $video = Video::where('upload_id', $uploadId)
-            ->first();
+        $video = $this->getVideoModel($uploadId);
 
         if ($video) return $video;
 
         $video = $this->createVideoModel($uploadId);
 
         return $video;
+    }
+
+    protected function getVideoModel($uploadId)
+    {
+        return Video::where('upload_id', $uploadId)
+            ->first();
     }
 
     protected function createVideoModel($uploadId)
@@ -131,19 +136,18 @@ class VideoController extends Controller
         return $path . "/" . $name . "." . $extension;
     }
 
-    public function storeVideoUpload(Request $request)
+    public function storeVideoUpload(Video $video, Request $request)
     {
-        $allData = $request->only(['title']);
-        $videoFile = $request->file('file');
-        $videoFilePath = $this->storeVideoFile($videoFile);
+        $allData = $request->only(['title', 'description']);
 
-        $video = new Video();
         $video->title = $allData['title'];
-        $video->filepath = $videoFilePath;
+        $video->description = $allData['description'];
         $video->save();
 
         VideoUploaded::dispatch($video);
 
-        return view('upload-success');
+        return response()->json([
+            'video' => $video
+        ]);
     }
 }
