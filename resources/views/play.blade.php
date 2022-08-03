@@ -4,6 +4,8 @@
             <source src="{{$url}}" type="video/mp4"></source>
         </video>
 
+        <video-title title="{{$video->title}}" :views="20000"></video-title>
+
         <h1 class="text-2xl font-bold">{{$video->title}}</h1>
         <p class="text-sm text-gray-700">{{$video->updated_at->diffForHumans()}}</p>
     </div>
