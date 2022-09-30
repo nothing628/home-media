@@ -15,7 +15,7 @@
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.ts'])
+    @vite(['resources/js/app.ts'])
 </head>
 
 <body>
