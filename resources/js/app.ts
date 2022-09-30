@@ -1,14 +1,20 @@
-require("./bootstrap");
+import "./bootstrap";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createRouter, createWebHashHistory } from "vue-router";
+import MainApp from './MainApp.vue';
 import ComponentPlugin from "./components";
 
-const vueApp = createApp({});
+const vueApp = createApp(MainApp);
 const store = createPinia();
 const router = createRouter({
     history: createWebHashHistory(),
-    routes: [],
+    routes: [
+        {
+            path: '/',
+            component: () => import('./pages/HomePage.vue')
+        }
+    ],
 });
 
 vueApp.use(ComponentPlugin);

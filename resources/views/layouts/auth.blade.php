@@ -13,10 +13,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet" />
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" />
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    @vite(['resources/css/app.css', 'resources/js/app.ts'])
 </head>
 
 <body>
