@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/inertia-vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import VideoThumb from '@/Components/VideoThumb.vue';
+import VideoTitle from '@/components/video/video-title.vue';
+import VideoDescription from '@/components/video/video-description.vue';
+import VideoChannel from '@/components/video/video-channel.vue'
 
 defineProps<{
     video: any,
@@ -18,12 +20,12 @@ defineProps<{
                 <source :src="url" type="video/mp4" />
             </video>
 
-            <video-title :title="video.title" :views="20000"></video-title>
-            <video-channel channel-name="Administrator" channel-avatar="/images/login.png"
+            <VideoTitle :title="video.title" :views="20000"></VideoTitle>
+            <VideoChannel channel-name="Administrator" channel-avatar="/images/login.png"
                 :channel-subscriber-count="1000000000" is-channel-verified
                 :published-at="video.updated_at">
-            </video-channel>
-            <video-description description="Lorem ipsum" :tags="['test']"></video-description>
+            </VideoChannel>
+            <VideoDescription description="Lorem ipsum" :tags="['test']"></VideoDescription>
         </div>
     </GuestLayout>
 </template>
