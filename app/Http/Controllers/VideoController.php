@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\VideoProcessor\Base;
 use App\Models\Video;
 use App\Events\VideoUploaded;
+use Inertia\Inertia;
 
 class VideoController extends Controller
 {
@@ -18,7 +19,8 @@ class VideoController extends Controller
     {
         $public_path = basename($video->filepath);
         $public_url = asset('storage/' . $public_path);
-        return view('play', ['video' => $video, 'url' => $public_url]);
+
+        return Inertia::render("VideoPlayPage", ['video' => $video, 'url' => $public_url]);
     }
 
     public function handleUploadChunk(Request $request)
