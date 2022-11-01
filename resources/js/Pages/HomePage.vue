@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/inertia-vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import VideoThumb from '@/Components/VideoThumb.vue';
 
 defineProps<{
     videos: any[]
@@ -11,7 +12,7 @@ defineProps<{
     <Head title="Dashboard" />
     <GuestLayout>
         <div class="flex flex-wrap justify-evenly">
-            <x-video-thumb v-for="video in videos" :key="video.id" :video="video"></x-video-thumb>
+            <VideoThumb v-for="video in videos" :key="video.id" :video="video"></VideoThumb>
         </div>
 
         <div class="flex justify-center py-4 mt-2">
