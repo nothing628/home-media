@@ -1,24 +1,32 @@
 import "./bootstrap";
-import "../css/app.sass";
-import { createApp } from "vue";
+import "../css/app.css";
+
+import { createApp, h } from "vue";
 import { createPinia } from "pinia";
-import { createRouter, createWebHashHistory } from "vue-router";
-import MainApp from './MainApp.vue';
+import { createInertiaApp } from '@inertiajs/inertia-vue3';
+import { InertiaProgress } from '@inertiajs/progress';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+
 import ComponentPlugin from "./components";
 
-const vueApp = createApp({});
 const store = createPinia();
-// const router = createRouter({
-//     history: createWebHashHistory(),
-//     routes: [
-//         {
-//             path: '/',
-//             component: () => import('./pages/HomePage.vue')
-//         }
-//     ],
-// });
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
-vueApp.use(ComponentPlugin);
-vueApp.use(store);
-// vueApp.use(router);
-vueApp.mount("#app");
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+    setup({ el, app, props, plugin }) {
+        const vueApp =createApp({ render: () => h(app, props) })
+        vueApp.use(ComponentPlugin);
+        vueApp.use(store);
+        vueApp.use(plugin)
+        vueApp.use(ZiggyVue, Ziggy)
+        vueApp.mount(el)
+
+        return vueApp;
+    },
+});
+
+InertiaProgress.init({ color: '#4B5563' });
+
