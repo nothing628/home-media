@@ -2,7 +2,7 @@
     <ul class="ml-auto md:ml-0 mr-[7px] flex-row flex pl-0 list-none">
         <li class="mx-1">
             <a class="text-black/50 block relative py-[22px] px-[5px] xl:py-[17px] xl:px-[13px] text-[0px] xl:text-sm leading-[0px]"
-                href="{{ route('upload') }}">
+                :href="route('upload')">
                 <i class="fas fa-plus-circle fa-fw text-xs leading-3"></i>
                 Upload Video
             </a>

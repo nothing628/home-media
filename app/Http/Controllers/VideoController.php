@@ -12,7 +12,7 @@ class VideoController extends Controller
 {
     public function showUploadPageView()
     {
-        return view('upload');
+        return Inertia::render('Upload');
     }
 
     public function showVideoPage(Video $video)

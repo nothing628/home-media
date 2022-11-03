@@ -12,7 +12,7 @@ import RightMenu from './Navheader/RightMenu.vue';
             <i class="fas fa-bars"></i>
         </button> &nbsp;&nbsp;
 
-        <a class="inline-block py-[5px] mr-1 text-black text-xl whitespace-nowrap" href="{{ url('/') }}">
+        <a class="inline-block py-[5px] mr-1 text-black text-xl whitespace-nowrap" :href="route('home')">
             MeTube
             <img class="" alt="" src="img/logo.png">
         </a>
