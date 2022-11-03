@@ -11,9 +11,6 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet" />
-
     <!-- Scripts -->
     @vite(['resources/js/app.ts'])
 </head>
@@ -25,9 +22,7 @@
         <div class="flex">
             <x-sidebar></x-sidebar>
             <x-content>
-                @if(isset($slot))
                 {{ $slot }}
-                @endif
 
                 @yield('content')
             </x-content>

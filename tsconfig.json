@@ -1,6 +1,9 @@
 {
     "compilerOptions": {
         "jsx": "preserve",
+        "types": [
+            "vite/client"
+        ],
         "typeRoots": [
             "./resources/js/types",
             "./node_modules/@types",

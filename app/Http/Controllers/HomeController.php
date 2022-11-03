@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,8 @@ class HomeController extends Controller
     {
         $videos = Video::all();
 
-        return view('home', ['videos' => $videos]);
+        return Inertia::render("HomePage", [
+            'videos' => $videos
+        ]);
     }
 }

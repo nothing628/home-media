@@ -1,32 +1,14 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue'
-import { RouterView, useRouter } from 'vue-router'
+import { onMounted, watch, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUploadStore } from "@/stores/upload"
 import UploadHome from './upload-home.vue'
 import UploadProcess from './upload-process.vue'
 import UploadSuccess from './upload-success.vue'
 
-const router = useRouter()
+const currentPath = ref('/')
 const uploadStore = useUploadStore()
 const { error_message, is_file_added } = storeToRefs(uploadStore)
-
-router.addRoute({
-    path: '/',
-    component: UploadHome,
-    name: "upload-home"
-})
-router.addRoute({
-    path: '/process',
-    component: UploadProcess,
-    name: 'upload-process'
-})
-router.addRoute({
-    path: '/success',
-    component: UploadSuccess,
-    name: 'upload-success'
-})
-router.push('/')
 
 onMounted(() => {
     uploadStore.initDropzone('form#dropzone')
@@ -34,9 +16,9 @@ onMounted(() => {
 
 watch(is_file_added, (after, before) => {
     if (after)
-        router.replace('/process')
+        currentPath.value = '/process'
     else
-        router.replace('/')
+        currentPath.value = '/'
 })
 </script>
 
@@ -48,6 +30,9 @@ watch(is_file_added, (after, before) => {
         <div v-if="error_message" class="">
             <p>{{ error_message }}</p>
         </div>
-        <RouterView />
+
+        <UploadHome v-if="currentPath == '/'" />
+        <UploadProcess v-if="currentPath == '/process'" />
+        <UploadSuccess v-if="currentPath == '/success'" />
     </div>
 </template>
