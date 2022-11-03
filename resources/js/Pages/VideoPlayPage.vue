@@ -16,7 +16,7 @@ defineProps<{
     <Head title="Dashboard" />
     <GuestLayout>
         <div class="max-w-6xl mx-auto">
-            <video width="640" controls class="w-full mb-4">
+            <video width="640" controls class="w-full mb-4 max-h-[600px]">
                 <source :src="url" type="video/mp4" />
             </video>
 
