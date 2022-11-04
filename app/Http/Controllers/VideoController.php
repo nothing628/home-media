@@ -15,6 +15,11 @@ class VideoController extends Controller
         return Inertia::render('Upload');
     }
 
+    public function testHls()
+    {
+        return Inertia::render('VideoTest');
+    }
+
     public function showVideoPage(Video $video)
     {
         $public_path = basename($video->filepath);

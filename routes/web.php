@@ -29,6 +29,7 @@ use App\Http\Controllers\VideoController;
 
 Route::get('/', [HomeController::class, 'showHomePageView'])->name('home');
 Route::get('/video/{video}', [VideoController::class, 'showVideoPage'])->name('video.show');
+Route::get('/videotest', [VideoController::class, 'testHls'])->name('video.test');
 Route::get('/upload', [VideoController::class, 'showUploadPageView'])->name('upload');
 Route::post('/upload', [VideoController::class, 'storeVideoUpload']);
 Route::get('/dashboard', [DashboardController::class, 'showDashboardView'])
