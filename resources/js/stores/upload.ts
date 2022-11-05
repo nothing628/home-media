@@ -95,6 +95,7 @@ export const useUploadStore = defineStore<
                 chunkSize: 1024 * 512,
                 forceChunking: true,
                 disablePreviews: true,
+                maxFilesize: 4096,
             });
 
             dropzone.on("error", (file, message) => {
