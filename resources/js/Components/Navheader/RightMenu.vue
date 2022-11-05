@@ -44,7 +44,7 @@
                 href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <img class="w-[30px] h-[30px] rounded-full -mt-[9px] mr-0.5 -mb-[6px] ml-0 inline" alt="Avatar"
-                    src="{{asset('images/login.png')}}">
+                    src="images/login.png">
                 Osahan
             </a>
             <div class="hidden" aria-labelledby="userDropdown">
