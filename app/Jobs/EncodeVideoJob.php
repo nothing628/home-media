@@ -8,9 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 use FFMpeg\Format\Video\X264;
-use FFMpeg\FFMpeg as FFMpegBin;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use App\Models\Video;
 
@@ -40,11 +38,9 @@ class EncodeVideoJob implements ShouldQueue
         $video = $this->video;
         $videoPublicPath = $video->public_path;
         $playlistPath = $this->generatePlaylistName($videoPublicPath);
-        $duration = $this->getDuration($videoPublicPath);
 
         $this->encodeVideo($videoPublicPath, $playlistPath);
         $this->storeMasterPlaylist($playlistPath, $video);
-        $this->storeDuration($duration, $video);
     }
 
     public function generatePlaylistName($videoPath)
@@ -80,21 +76,6 @@ class EncodeVideoJob implements ShouldQueue
             //     $playlists("{$name}-{$format->getKiloBitrate()}-{$key}.m3u8");
             // })
             ->save($playlistPath);
-    }
-
-    public function getDuration($videoPath)
-    {
-        $duration = FFMpeg::fromDisk('local')
-            ->open($videoPath)
-            ->getDurationInSeconds();
-
-        return $duration;
-    }
-
-    public function storeDuration($duration, Video $video)
-    {
-        $video->duration = $duration;
-        $video->save();
     }
 
     public function storeMasterPlaylist($masterPlaylistPath, Video $video)

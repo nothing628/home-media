@@ -4,8 +4,10 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Bus;
 use App\Jobs\EncodeVideoJob;
 use App\Jobs\GenerateVideoThumbnailJob;
+use App\Jobs\UpdateVideoDurationJob;
 use App\Events\VideoUploaded;
 
 class VideoUploadedListener implements ShouldQueue
@@ -37,7 +39,10 @@ class VideoUploadedListener implements ShouldQueue
     {
         $video = $event->video;
 
-        EncodeVideoJob::dispatch($video);
-        GenerateVideoThumbnailJob::dispatch($video);
+        Bus::chain([
+            new GenerateVideoThumbnailJob($video),
+            new UpdateVideoDurationJob($video),
+            new EncodeVideoJob($video),
+        ])->dispatch();
     }
 }
