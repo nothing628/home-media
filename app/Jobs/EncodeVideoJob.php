@@ -40,9 +40,11 @@ class EncodeVideoJob implements ShouldQueue
         $video = $this->video;
         $videoPublicPath = $video->public_path;
         $playlistPath = $this->generatePlaylistName($videoPublicPath);
+        $duration = $this->getDuration($videoPublicPath);
 
         $this->encodeVideo($videoPublicPath, $playlistPath);
         $this->storeMasterPlaylist($playlistPath, $video);
+        $this->storeDuration($duration, $video);
     }
 
     public function generatePlaylistName($videoPath)
@@ -78,6 +80,21 @@ class EncodeVideoJob implements ShouldQueue
             //     $playlists("{$name}-{$format->getKiloBitrate()}-{$key}.m3u8");
             // })
             ->save($playlistPath);
+    }
+
+    public function getDuration($videoPath)
+    {
+        $duration = FFMpeg::fromDisk('local')
+            ->open($videoPath)
+            ->getDurationInSeconds();
+
+        return $duration;
+    }
+
+    public function storeDuration($duration, Video $video)
+    {
+        $video->duration = $duration;
+        $video->save();
     }
 
     public function storeMasterPlaylist($masterPlaylistPath, Video $video)
