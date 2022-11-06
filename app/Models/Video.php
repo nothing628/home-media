@@ -23,7 +23,7 @@ class Video extends Model
      *
      * @var array
      */
-    protected $appends = ['thumb_url'];
+    protected $appends = ['thumb_url', 'media_playlist_url'];
 
     public function getPublicPathAttribute()
     {
@@ -31,6 +31,11 @@ class Video extends Model
         $filename =  basename($filepath);
 
         return "public/".$filename;
+    }
+
+    public function getMediaPlaylistUrlAttribute()
+    {
+        return Storage::url($this->master_playlist_path);
     }
 
     public function getThumbUrlAttribute()

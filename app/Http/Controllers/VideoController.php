@@ -22,10 +22,7 @@ class VideoController extends Controller
 
     public function showVideoPage(Video $video)
     {
-        $public_path = basename($video->filepath);
-        $public_url = asset('storage/' . $public_path);
-
-        return Inertia::render("VideoPlayPage", ['video' => $video, 'url' => $public_url]);
+        return Inertia::render("VideoPlayPage", ['video' => $video, 'url' => $video->media_playlist_url]);
     }
 
     public function handleUploadChunk(Request $request)
