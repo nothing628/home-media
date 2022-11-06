@@ -23,7 +23,7 @@ class Video extends Model
      *
      * @var array
      */
-    protected $appends = ['thumb_url', 'media_playlist_url'];
+    protected $appends = ['thumb_url', 'media_playlist_url', 'created'];
 
     public function getPublicPathAttribute()
     {
@@ -41,5 +41,10 @@ class Video extends Model
     public function getThumbUrlAttribute()
     {
         return Storage::url($this->thumb_path);
+    }
+
+    public function getCreatedAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 }
