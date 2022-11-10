@@ -79,9 +79,9 @@ import MenuItem from './Footer/MenuItem.vue';
                         <h6 class="text-[#333] text-base font-medium mb-2 mt-6 leading-tight">DOWNLOAD APP</h6>
                         <div>
                             <a href="#"><img alt="" class="h-7 mt-[5px] py-[3px] px-1 rounded-[3px] bg-[#231f20]"
-                                    src="{{ asset('images/google.png') }}"></a>
+                                    src="images/google.png"></a>
                             <a href="#"><img alt="" class="h-7 mt-[5px] py-[3px] px-1 rounded-[3px] bg-[#231f20]"
-                                    src="{{ asset('images/apple.png') }}"></a>
+                                    src="images/apple.png"></a>
                         </div>
                     </div>
                 </div>

@@ -1,40 +1,40 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Jobs;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
-use App\Events\VideoUploaded;
+use App\Models\Video;
 
-class GenerateVideoThumbnail implements ShouldQueue
+class GenerateVideoThumbnailJob implements ShouldQueue
 {
-    /**
-     * The time (seconds) before the job should be processed.
-     *
-     * @var int
-     */
-    public $delay = 5;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public $video;
 
     /**
-     * Create the event listener.
+     * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Video $video)
     {
-        //
+        $this->video = $video;
     }
 
     /**
-     * Handle the event.
+     * Execute the job.
      *
-     * @param  object  $event
      * @return void
      */
-    public function handle(VideoUploaded $event)
+    public function handle()
     {
-        $video = $event->video;
+        $video = $this->video;
         $video_public_path = $video->public_path;
         $video_thumb_path = $this->generateThumbnail($video_public_path);
 

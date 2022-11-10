@@ -1,9 +1,8 @@
-<script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+<script setup lang="ts">
 import Header from '@/Components/Header.vue';
 import Sidebar from '@/Components/SideBar.vue';
 import PageContent from '@/Components/PageContent.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import PageFooter from '@/Components/PageFooter.vue';
 </script>
 
 <template>
@@ -11,9 +10,15 @@ import { Link } from '@inertiajs/inertia-vue3';
         <Header></Header>
         <div class="flex">
             <Sidebar></Sidebar>
-            <PageContent>
-                <slot />
-            </PageContent>
+            <div class="overflow-x-hidden w-full">
+                <PageContent>
+                    <slot />
+                </PageContent>
+
+                <slot name="footer">
+                    <PageFooter />
+                </slot>
+            </div>
         </div>
     </div>
 </template>
